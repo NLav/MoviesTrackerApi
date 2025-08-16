@@ -10,13 +10,6 @@ const GenreSchema = z.object({
 
 type GenreProperties = z.infer<typeof GenreSchema>;
 
-// export type LoadAllGenreInput = {
-//   paginationParameters: PaginationParameters;
-//   signal: AbortSignal;
-// };
-//
-// export type LoadAllGenreOutput = Pagination<GenreEntity>;
-
 export class GenreEntity implements GenreProperties {
   id!: string;
   name!: string;
