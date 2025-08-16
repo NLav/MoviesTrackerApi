@@ -1,1 +1,1 @@
-export * from "./genre.factory.module.js";
+export * from "./genre.factory.module";

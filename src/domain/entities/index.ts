@@ -1,1 +1,1 @@
-export * from "./genre.entity.js";
+export * from "./genre.entity";

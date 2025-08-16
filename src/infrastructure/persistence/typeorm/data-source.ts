@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 
-import { Genre } from "./entities/index.js";
+import { Genre } from "./entities";
 
 export const AppDataSource = new DataSource({
   type: "mysql",

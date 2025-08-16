@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
 
-import { GenreFactoryModule } from "@/infrastructure/factories/index.js";
+import { GenreFactoryModule } from "@/infrastructure/factories";
 
-import { GenreController } from "./index.js";
+import { GenreController } from ".";
 
 @Module({
   imports: [GenreFactoryModule],
-  controllers: [GenreController],
+  controllers: [],
 })
 export class ControllerModule {}

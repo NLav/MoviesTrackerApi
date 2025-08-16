@@ -1,1 +1,1 @@
-export * from "./load-all.js";
+export * from "./load-all";

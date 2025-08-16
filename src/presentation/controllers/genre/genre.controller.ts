@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
 
-import { GenreEntity } from "@/domain/entities/index.js";
-import { LoadAllGenresUsecase } from "@/domain/usecases/genre/index.js";
+import { GenreEntity } from "@/domain/entities";
+import { LoadAllGenresUsecase } from "@/domain/usecases/genre";
 
 @Controller("genres")
 export class GenreController {

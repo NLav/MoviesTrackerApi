@@ -1,2 +1,2 @@
-export * from "./controller.module.js";
-export * from "./genre/index.js";
+export * from "./controller.module";
+export * from "./genre";

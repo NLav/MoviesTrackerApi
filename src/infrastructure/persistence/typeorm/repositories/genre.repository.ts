@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 
-import { GenreEntity } from "@/domain/entities/index.js";
-import { GenreRepository } from "@/domain/repositories/index.js";
+import { GenreEntity } from "@/domain/entities";
+import { GenreRepository } from "@/domain/repositories";
 
-import { Genre } from "../entities/index.js";
+import { Genre } from "../entities";
 
 export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}

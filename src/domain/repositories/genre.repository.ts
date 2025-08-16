@@ -1,4 +1,4 @@
-import { GenreEntity } from "@/domain/entities/index.js";
+import { GenreEntity } from "@/domain/entities";
 
 export type GenreRepository = {
   loadAll(): Promise<GenreEntity[]>;

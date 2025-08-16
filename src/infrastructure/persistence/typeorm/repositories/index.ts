@@ -1,1 +1,1 @@
-export * from "./genre.repository.js";
+export * from "./genre.repository";

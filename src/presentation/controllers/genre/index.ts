@@ -1,1 +1,1 @@
-export * from "./genre.controller.js";
+export * from "./genre.controller";
