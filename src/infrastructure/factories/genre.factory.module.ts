@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { getRepositoryToken, TypeOrmModule } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
 
 import { LoadAllGenresUsecase } from "@/domain/usecases/genre";
 
@@ -11,7 +12,8 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
   providers: [
     {
       provide: "GenreRepository",
-      useFactory: (repository) => new TypeOrmGenreRepository(repository),
+      useFactory: (repository: Repository<Genre>) =>
+        new TypeOrmGenreRepository(repository),
       inject: [getRepositoryToken(Genre)],
     },
     LoadAllGenresUsecase,
