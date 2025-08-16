@@ -11,7 +11,7 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
   imports: [TypeOrmModule.forFeature([Genre])],
   providers: [
     {
-      provide: "GenreRepository",
+      provide: "GenreProvider",
       useFactory: (repository: Repository<Genre>) =>
         new TypeOrmGenreRepository(repository),
       inject: [getRepositoryToken(Genre)],

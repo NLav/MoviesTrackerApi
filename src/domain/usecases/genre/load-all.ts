@@ -5,7 +5,7 @@ import { GenreRepository } from "@/domain/repositories";
 
 export class LoadAllGenresUsecase {
   constructor(
-    @Inject("GenreRepository")
+    @Inject("GenreProvider")
     private readonly genreRepository: GenreRepository
   ) {}
 

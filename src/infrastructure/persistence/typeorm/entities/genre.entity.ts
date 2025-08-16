@@ -22,5 +22,5 @@ export class Genre {
   updatedAt: Date;
 
   @DeleteDateColumn({ name: "deleted_at", type: "timestamp", nullable: true })
-  deletedAt?: Date;
+  deletedAt: Date | null;
 }

@@ -5,7 +5,7 @@ const GenreSchema = z.object({
   name: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
-  deletedAt: z.date().optional(),
+  deletedAt: z.date().nullable(),
 });
 
 type GenreProperties = z.infer<typeof GenreSchema>;
@@ -15,7 +15,7 @@ export class GenreEntity implements GenreProperties {
   name!: string;
   createdAt!: Date;
   updatedAt!: Date;
-  deletedAt!: Date | undefined;
+  deletedAt!: Date | null;
 
   constructor(properties: GenreProperties) {
     const parsedProperties = GenreSchema.parse(properties);
