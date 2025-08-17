@@ -1,7 +1,10 @@
 import { Inject } from "@nestjs/common";
 
-import { GenreEntity } from "@/domain/entities";
-import { GenreRepository, LoadAllGenresInput } from "@/domain/repositories";
+import {
+  GenreRepository,
+  LoadAllGenresInput,
+  LoadAllGenresOutput,
+} from "@/domain/repositories";
 
 export class LoadAllGenresUsecase {
   constructor(
@@ -9,7 +12,7 @@ export class LoadAllGenresUsecase {
     private readonly genreRepository: GenreRepository
   ) {}
 
-  async execute(input: LoadAllGenresInput): Promise<GenreEntity[]> {
+  async execute(input: LoadAllGenresInput): Promise<LoadAllGenresOutput> {
     return this.genreRepository.loadAll(input);
   }
 }

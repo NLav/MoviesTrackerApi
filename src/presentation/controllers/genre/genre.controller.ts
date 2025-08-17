@@ -1,15 +1,31 @@
 import { Controller, Get, Query } from "@nestjs/common";
 
-import { GenreEntity } from "@/domain/entities";
-import { LoadAllGenresInput } from "@/domain/repositories";
-import { LoadAllGenresUsecase } from "@/domain/usecases/genre";
+import {
+  LoadAllGenresInput,
+  LoadAllGenresOutput,
+  LoadPaginatedGenresInput,
+  LoadPaginatedGenresOutput,
+} from "@/domain/repositories";
+import {
+  LoadAllGenresUsecase,
+  LoadPaginatedGenresUsecase,
+} from "@/domain/usecases/genre";
 
 @Controller("genres")
 export class GenreController {
-  constructor(private readonly loadAllGenres: LoadAllGenresUsecase) {}
+  constructor(
+    private readonly loadAllGenres: LoadAllGenresUsecase,
+    private readonly loadPaginatedGenres: LoadPaginatedGenresUsecase
+  ) {}
 
   @Get()
-  async getAll(@Query() input: LoadAllGenresInput): Promise<GenreEntity[]> {
+  async getAll(
+    @Query() input: LoadAllGenresInput | LoadPaginatedGenresInput
+  ): Promise<LoadAllGenresOutput | LoadPaginatedGenresOutput> {
+    if ("page" in input) {
+      return this.loadPaginatedGenres.execute(input);
+    }
+
     return this.loadAllGenres.execute(input);
   }
 }
