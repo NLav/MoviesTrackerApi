@@ -1,15 +1,21 @@
-import { Repository } from "typeorm";
+import { Like, Repository } from "typeorm";
 
 import { GenreEntity } from "@/domain/entities";
-import { GenreRepository } from "@/domain/repositories";
+import { GenreRepository, LoadAllGenresInput } from "@/domain/repositories";
 
 import { Genre } from "../entities";
 
 export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}
 
-  async loadAll(): Promise<GenreEntity[]> {
-    const genres = await this.repository.find();
+  async loadAll(input: LoadAllGenresInput): Promise<GenreEntity[]> {
+    const genres = await this.repository.find({
+      where: {
+        ...(input.searchValue
+          ? { name: Like(`%${input.searchValue}%`) }
+          : undefined),
+      },
+    });
 
     return genres.map((genre) =>
       GenreEntity.with({

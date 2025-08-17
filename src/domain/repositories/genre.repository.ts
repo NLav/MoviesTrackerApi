@@ -1,5 +1,9 @@
 import { GenreEntity } from "@/domain/entities";
 
+export type LoadAllGenresInput = {
+  searchValue?: string;
+};
+
 export type GenreRepository = {
-  loadAll(): Promise<GenreEntity[]>;
+  loadAll(input: LoadAllGenresInput): Promise<GenreEntity[]>;
 };
