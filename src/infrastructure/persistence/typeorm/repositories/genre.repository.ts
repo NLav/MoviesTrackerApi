@@ -3,6 +3,8 @@ import { Like, Repository } from "typeorm";
 import { Pagination } from "@/application/dtos";
 import { GenreEntity } from "@/domain/entities";
 import {
+  CreateGenreInput,
+  CreateGenreOutput,
   GenreRepository,
   LoadAllGenresInput,
   LoadAllGenresOutput,
@@ -14,13 +16,27 @@ import { Genre } from "../entities";
 export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}
 
+  async create(input: CreateGenreInput): Promise<CreateGenreOutput> {
+    console.log("input", input);
+
+    const genre = await this.repository.save(input);
+
+    console.log("genre", genre);
+
+    const validatedGenre = GenreEntity.with(genre);
+
+    return validatedGenre;
+  }
+
   async loadAll(input: LoadAllGenresInput): Promise<LoadAllGenresOutput> {
+    const where = {
+      ...(input.searchValue
+        ? { name: Like(`%${input.searchValue}%`) }
+        : undefined),
+    };
+
     const genres = await this.repository.find({
-      where: {
-        ...(input.searchValue
-          ? { name: Like(`%${input.searchValue}%`) }
-          : undefined),
-      },
+      where,
     });
 
     const validatedGenres = genres.map((genre) =>

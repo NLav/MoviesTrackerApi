@@ -3,6 +3,7 @@ import { getRepositoryToken, TypeOrmModule } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import {
+  CreateGenreUsecase,
   LoadAllGenresUsecase,
   LoadPaginatedGenresUsecase,
 } from "@/domain/usecases/genre";
@@ -19,9 +20,14 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
         new TypeOrmGenreRepository(repository),
       inject: [getRepositoryToken(Genre)],
     },
+    CreateGenreUsecase,
     LoadAllGenresUsecase,
     LoadPaginatedGenresUsecase,
   ],
-  exports: [LoadAllGenresUsecase, LoadPaginatedGenresUsecase],
+  exports: [
+    CreateGenreUsecase,
+    LoadAllGenresUsecase,
+    LoadPaginatedGenresUsecase,
+  ],
 })
 export class GenreFactoryModule {}
