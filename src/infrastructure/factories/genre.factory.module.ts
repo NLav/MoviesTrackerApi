@@ -4,6 +4,7 @@ import { Repository } from "typeorm";
 
 import {
   CreateGenreUsecase,
+  DeleteGenreUsecase,
   LoadAllGenresUsecase,
   LoadPaginatedGenresUsecase,
 } from "@/domain/usecases/genre";
@@ -21,11 +22,13 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
       inject: [getRepositoryToken(Genre)],
     },
     CreateGenreUsecase,
+    DeleteGenreUsecase,
     LoadAllGenresUsecase,
     LoadPaginatedGenresUsecase,
   ],
   exports: [
     CreateGenreUsecase,
+    DeleteGenreUsecase,
     LoadAllGenresUsecase,
     LoadPaginatedGenresUsecase,
   ],

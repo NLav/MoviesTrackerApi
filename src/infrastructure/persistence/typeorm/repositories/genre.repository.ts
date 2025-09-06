@@ -5,6 +5,8 @@ import { GenreEntity } from "@/domain/entities";
 import {
   CreateGenreInput,
   CreateGenreOutput,
+  DeleteGenreInput,
+  DeleteGenreOutput,
   GenreRepository,
   LoadAllGenresInput,
   LoadAllGenresOutput,
@@ -17,15 +19,24 @@ export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}
 
   async create(input: CreateGenreInput): Promise<CreateGenreOutput> {
-    console.log("input", input);
-
     const genre = await this.repository.save(input);
-
-    console.log("genre", genre);
-
     const validatedGenre = GenreEntity.with(genre);
 
     return validatedGenre;
+  }
+
+  async delete(input: DeleteGenreInput): Promise<DeleteGenreOutput> {
+    const genre = await this.repository.findOne({
+      where: {
+        id: input.id,
+      },
+    });
+
+    if (!genre) throw new Error("Invalid ID");
+
+    await this.repository.delete(genre.id);
+
+    return genre;
   }
 
   async loadAll(input: LoadAllGenresInput): Promise<LoadAllGenresOutput> {
