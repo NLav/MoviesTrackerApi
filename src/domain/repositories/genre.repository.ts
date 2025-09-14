@@ -16,6 +16,9 @@ export type LoadAllGenresOutput = GenreEntity[];
 export type LoadPaginatedGenresInput = PaginationParameters;
 export type LoadPaginatedGenresOutput = Pagination<GenreEntity>;
 
+export type UpdateGenreInput = Pick<Genre, "id" | "name">;
+export type UpdateGenreOutput = Genre;
+
 export type GenreRepository = {
   create(input: CreateGenreInput): Promise<CreateGenreOutput>;
   delete(input: DeleteGenreInput): Promise<DeleteGenreOutput>;
@@ -23,4 +26,5 @@ export type GenreRepository = {
   loadPaginated(
     input: LoadPaginatedGenresInput
   ): Promise<LoadPaginatedGenresOutput>;
+  update(input: UpdateGenreInput): Promise<UpdateGenreOutput>;
 };

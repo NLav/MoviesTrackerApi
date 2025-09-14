@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
 } from "@nestjs/common";
 
@@ -16,31 +17,30 @@ import {
   LoadAllGenresOutput,
   LoadPaginatedGenresInput,
   LoadPaginatedGenresOutput,
+  UpdateGenreInput,
+  UpdateGenreOutput,
 } from "@/domain/repositories";
 import {
   CreateGenreUsecase,
   DeleteGenreUsecase,
   LoadAllGenresUsecase,
   LoadPaginatedGenresUsecase,
+  UpdateGenreUsecase,
 } from "@/domain/usecases/genre";
 
 @Controller("genres")
 export class GenreController {
   constructor(
     private readonly createGenre: CreateGenreUsecase,
-    private readonly deleteGenre: DeleteGenreUsecase,
     private readonly loadAllGenres: LoadAllGenresUsecase,
-    private readonly loadPaginatedGenres: LoadPaginatedGenresUsecase
+    private readonly loadPaginatedGenres: LoadPaginatedGenresUsecase,
+    private readonly updateGenre: UpdateGenreUsecase,
+    private readonly deleteGenre: DeleteGenreUsecase
   ) {}
 
   @Post()
   async create(@Body() input: CreateGenreInput): Promise<CreateGenreOutput> {
     return this.createGenre.execute(input);
-  }
-
-  @Delete(":id")
-  async delete(@Param("id") id: string): Promise<DeleteGenreOutput> {
-    return this.deleteGenre.execute({ id });
   }
 
   @Get()
@@ -52,5 +52,18 @@ export class GenreController {
     }
 
     return this.loadAllGenres.execute(input);
+  }
+
+  @Put(":id")
+  async update(
+    @Param("id") id: string,
+    @Body() input: Omit<UpdateGenreInput, "id">
+  ): Promise<UpdateGenreOutput> {
+    return this.updateGenre.execute({ id, ...input });
+  }
+
+  @Delete(":id")
+  async delete(@Param("id") id: string): Promise<DeleteGenreOutput> {
+    return this.deleteGenre.execute({ id });
   }
 }

@@ -11,7 +11,11 @@ import {
   LoadAllGenresInput,
   LoadAllGenresOutput,
   LoadPaginatedGenresInput,
+  UpdateGenreInput,
+  UpdateGenreOutput,
 } from "@/domain/repositories";
+
+import { Genre } from "../entities";
 
 export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}
@@ -86,5 +90,22 @@ export class TypeOrmGenreRepository implements GenreRepository {
         totalPages: Math.ceil(quantity / Number(input.limit)),
       },
     };
+  }
+
+  async update(input: UpdateGenreInput): Promise<UpdateGenreOutput> {
+    const existingGenre = await this.repository.findOne({
+      where: { id: input.id },
+    });
+
+    if (!existingGenre) throw new Error("genre not found!");
+
+    await this.repository.save(input);
+
+    const updatedGenre = await this.repository.findOne({
+      where: { id: input.id },
+    });
+    const validatedGenre = GenreEntity.with(updatedGenre!);
+
+    return validatedGenre;
   }
 }
