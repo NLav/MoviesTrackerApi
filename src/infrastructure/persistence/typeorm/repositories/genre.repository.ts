@@ -13,8 +13,6 @@ import {
   LoadPaginatedGenresInput,
 } from "@/domain/repositories";
 
-import { Genre } from "../entities";
-
 export class TypeOrmGenreRepository implements GenreRepository {
   constructor(private readonly repository: Repository<Genre>) {}
 

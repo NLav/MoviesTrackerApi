@@ -7,6 +7,7 @@ import {
   DeleteGenreUsecase,
   LoadAllGenresUsecase,
   LoadPaginatedGenresUsecase,
+  UpdateGenreUsecase,
 } from "@/domain/usecases/genre";
 
 import { Genre } from "../persistence/typeorm/entities";
@@ -25,12 +26,14 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
     DeleteGenreUsecase,
     LoadAllGenresUsecase,
     LoadPaginatedGenresUsecase,
+    UpdateGenreUsecase,
   ],
   exports: [
     CreateGenreUsecase,
     DeleteGenreUsecase,
     LoadAllGenresUsecase,
     LoadPaginatedGenresUsecase,
+    UpdateGenreUsecase,
   ],
 })
 export class GenreFactoryModule {}
