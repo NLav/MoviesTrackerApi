@@ -10,6 +10,8 @@ import {
   GenreRepository,
   LoadAllGenresInput,
   LoadAllGenresOutput,
+  LoadOneGenreInput,
+  LoadOneGenreOutput,
   LoadPaginatedGenresInput,
   UpdateGenreInput,
   UpdateGenreOutput,
@@ -63,6 +65,14 @@ export class TypeOrmGenreRepository implements GenreRepository {
     );
 
     return validatedGenres;
+  }
+
+  async loadOne(input: LoadOneGenreInput): Promise<LoadOneGenreOutput> {
+    const genre = await this.repository.findOne({ where: { id: input.id } });
+
+    if (!genre) throw new Error("genre not found!");
+
+    return genre;
   }
 
   async loadPaginated(

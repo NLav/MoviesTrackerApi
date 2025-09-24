@@ -15,6 +15,7 @@ import {
   DeleteGenreOutput,
   LoadAllGenresInput,
   LoadAllGenresOutput,
+  LoadOneGenreOutput,
   LoadPaginatedGenresInput,
   LoadPaginatedGenresOutput,
   UpdateGenreInput,
@@ -24,6 +25,7 @@ import {
   CreateGenreUsecase,
   DeleteGenreUsecase,
   LoadAllGenresUsecase,
+  LoadOneGenreUsecase,
   LoadPaginatedGenresUsecase,
   UpdateGenreUsecase,
 } from "@/domain/usecases/genre";
@@ -34,6 +36,7 @@ export class GenreController {
     private readonly createGenre: CreateGenreUsecase,
     private readonly loadAllGenres: LoadAllGenresUsecase,
     private readonly loadPaginatedGenres: LoadPaginatedGenresUsecase,
+    private readonly loadOneGenre: LoadOneGenreUsecase,
     private readonly updateGenre: UpdateGenreUsecase,
     private readonly deleteGenre: DeleteGenreUsecase
   ) {}
@@ -52,6 +55,11 @@ export class GenreController {
     }
 
     return this.loadAllGenres.execute(input);
+  }
+
+  @Get(":id")
+  async getOne(@Param("id") id: string): Promise<LoadOneGenreOutput> {
+    return this.loadOneGenre.execute({ id });
   }
 
   @Put(":id")

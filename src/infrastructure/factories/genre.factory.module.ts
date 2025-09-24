@@ -6,6 +6,7 @@ import {
   CreateGenreUsecase,
   DeleteGenreUsecase,
   LoadAllGenresUsecase,
+  LoadOneGenreUsecase,
   LoadPaginatedGenresUsecase,
   UpdateGenreUsecase,
 } from "@/domain/usecases/genre";
@@ -25,6 +26,7 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
     CreateGenreUsecase,
     DeleteGenreUsecase,
     LoadAllGenresUsecase,
+    LoadOneGenreUsecase,
     LoadPaginatedGenresUsecase,
     UpdateGenreUsecase,
   ],
@@ -32,6 +34,7 @@ import { TypeOrmGenreRepository } from "../persistence/typeorm/repositories";
     CreateGenreUsecase,
     DeleteGenreUsecase,
     LoadAllGenresUsecase,
+    LoadOneGenreUsecase,
     LoadPaginatedGenresUsecase,
     UpdateGenreUsecase,
   ],
