@@ -16,7 +16,9 @@ export type LoadAllGenresOutput = GenreEntity[];
 export type LoadOneGenreInput = Pick<Genre, "id">;
 export type LoadOneGenreOutput = GenreEntity;
 
-export type LoadPaginatedGenresInput = PaginationParameters;
+export type LoadPaginatedGenresInput = PaginationParameters & {
+  searchValue?: string;
+};
 export type LoadPaginatedGenresOutput = Pagination<GenreEntity>;
 
 export type UpdateGenreInput = Pick<Genre, "id" | "name">;

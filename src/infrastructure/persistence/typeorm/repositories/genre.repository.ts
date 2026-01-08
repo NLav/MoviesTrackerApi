@@ -1,4 +1,4 @@
-import { Like, Repository } from "typeorm";
+import { ILike, Like, Repository } from "typeorm";
 
 import { Pagination } from "@/application/dtos";
 import { GenreEntity } from "@/domain/entities";
@@ -81,6 +81,11 @@ export class TypeOrmGenreRepository implements GenreRepository {
     const [genres, quantity] = await this.repository.findAndCount({
       skip: (Number(input.page) - 1) * Number(input.limit),
       take: Number(input.limit),
+      where: {
+        ...(input.searchValue && {
+          name: ILike(`%${input.searchValue}%`),
+        }),
+      },
     });
 
     const validatedGenres = genres.map((genre) =>
